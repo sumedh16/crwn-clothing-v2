@@ -1,0 +1,33 @@
+.sign-up-container {
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 16px;
+    width: 480px !important;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    h1 {
+        margin-top: 0;
+        align-self: center;
+    }
+
+    span {
+        font-size: 18px;
+        align-self: center;
+
+        .sec-link {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+
+    form {
+        .registration-buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+    }
+}

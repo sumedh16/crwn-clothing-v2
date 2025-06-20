@@ -1,0 +1,46 @@
+{
+    "userName": {
+        "required": {
+            "value": true,
+            "message": "User Name is required."
+        },
+        "minLength": {
+            "value": 3,
+            "message": "User Name must be at least 3 characters."
+        },
+        "pattern": {
+            "value": "^[a-zA-Z0-9_]+$",
+            "message": "User Name can only contain letters, numbers, and underscores."
+        }
+    },
+    "email": {
+        "required": {
+            "value": true,
+            "message": "Email is required."
+        },
+        "pattern": {
+            "value": "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+            "message": "Please enter a valid email address."
+        }
+    },
+    "password": {
+        "required": {
+            "value": true,
+            "message": "Password is required."
+        },
+        "minLength": {
+            "value": 6,
+            "message": "Password must be at least 6 characters."
+        },
+        "pattern": {
+            "value": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$",
+            "message": "Password must contain at least one letter and one number."
+        }
+    },
+    "confirmPassword": {
+        "required": {
+            "value": true,
+            "message": "Confirm Password is required."
+        }
+    }
+}
