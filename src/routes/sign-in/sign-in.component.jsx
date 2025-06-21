@@ -3,11 +3,10 @@ import {
   signInWithEmailAndPasswordHandler,
 } from "../../utils/firebase/firebase.utils";
 import { Link } from "react-router-dom";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState } from "react";
 import FormInput from "../../components/form-input/form-input.component";
 import { validateForm } from "../../utils/forms/form.utils";
 import Button from "../../components/button/button.component";
-import { userContext } from "../../context/user.context";
 
 const SignIn = () => {
   const defaultFields = {
@@ -27,7 +26,6 @@ const SignIn = () => {
       setFormFields(defaultFields);
       setErrors({});
       console.log("User signed in with Google successfully");
-      setCurrentUser(user);
     }
   };
 
@@ -45,7 +43,6 @@ const SignIn = () => {
         if (user) {
           setFormFields(defaultFields);
           setErrors({});
-          setCurrentUser(user);
           console.log("User signed in successfully");
         }
       } catch (e) {
@@ -76,7 +73,6 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFields);
   const [errors, setErrors] = useState({});
   const { email, password } = formFields;
-  const {  setCurrentUser } = useContext(userContext);
   return (
     <div className="sign-up-container">
       <h1>Welcome !</h1>

@@ -6,7 +6,9 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  onAuthStateChanged,
+  updateProfile
 } from "firebase/auth";
 
 import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
@@ -75,4 +77,20 @@ export const signInWithEmailAndPasswordHandler = async (email, password) => {
 
 export const signOutUser = async () => {
   return await signOut(auth);
+}
+
+export const onAuthStateChangedListener = (callback) => {
+  // this follows observer pattern - on unsubscribe, it will stop listening to auth state changes and call complete callback
+  // It will call the callback function whenever the authentication state changes
+  onAuthStateChanged(auth, callback);
+}
+
+export const updateUserDetails = async (user, displayName) => {
+  if (!user || !displayName) return;
+
+  try {
+    await updateProfile(user, { displayName });
+  } catch (error) {
+    console.error("Error updating user details", error.message);
+  }
 }

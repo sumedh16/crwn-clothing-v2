@@ -1,14 +1,13 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef } from "react";
 import {
   createAuthUserWithEmailAndPassword,
-  createUserProfileDocument,
+  updateUserDetails,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import "./sign-up.styles.scss";
 import { validateForm } from "../../utils/forms/form.utils";
 import { Link } from "react-router-dom";
 import Button from "../button/button.component";
-import { userContext } from "../../context/user.context";
 
 const SignUp = () => {
   const refs = {
@@ -28,22 +27,18 @@ const SignUp = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     const formValidations = validateForm(formFields);
-    if (formValidations.isValid ) {
+    if (formValidations.isValid) {
       try {
         const { user } = await createAuthUserWithEmailAndPassword(
           formFields.email,
           formFields.password
         );
+        await updateUserDetails(user, {
+          displayName: formFields.userName,
+        });
         setFormFields(defaultFields);
         setErros({});
         console.log("User created successfully", user);
-        setCurrentUser(user);
-        const userDocRef = await createUserProfileDocument({
-          ...user,
-          displayName: formFields.userName,
-          emailVerified: user.emailVerified,
-        });
-        console.log("User document reference", userDocRef);
       } catch (e) {
         console.error("Error creating user", e);
         switch (e.code) {
@@ -79,8 +74,6 @@ const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFields);
   const [errors, setErros] = useState({});
   const { userName, email, password, confirmPassword } = formFields;
-  const { setCurrentUser } = useContext(userContext);
-
   return (
     <div className={"sign-up-container"}>
       <h1>Register and Get Started ! </h1>
