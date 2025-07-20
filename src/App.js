@@ -4,6 +4,7 @@ import Navigation from './routes/navigation/navigation.component';
 import SignIn from './routes/sign-in/sign-in.component';
 import SignUp from './components/sign-up/sign-up.component';
 import Shop from './routes/shop/shop.component';
+import CheckOut from './components/checkout/checkout.component';
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <Route path='shop' element={<Shop />} />
         <Route path='sign-in' element={<SignIn />} />
         <Route path='sign-up' element={<SignUp />} />
+        <Route path='review' element={<CheckOut />} />
       </Route>
     </Routes>
   );

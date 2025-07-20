@@ -1,0 +1,27 @@
+.cart-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 8px;
+    gap: 16px;
+
+    img{
+      width: 35%;
+      height: 100%;  
+    }
+
+    .item-details{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.2rem; 
+      font-weight: 600;
+    }
+}

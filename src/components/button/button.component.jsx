@@ -5,10 +5,10 @@ const button_types = {
   inverted: "inverted",
 };
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+const Button = ({ children, buttonType, className ,...otherProps }) => {
   return (
     <button
-      className={`button-container ${button_types[buttonType] || ""}`}
+      className={`button-container ${button_types[buttonType] || ""} ${className}`}
       {...otherProps}
     >
       {children}
