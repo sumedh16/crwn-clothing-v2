@@ -1,9 +1,18 @@
 import { CartContext } from "../../context/cart.context";
 import { useContext } from "react";
 import "./checkout.styles.scss";
+import { SpinnerContext } from "../../context/spinner.context";
 
 const CheckOut = () => {
-  const { cartCount, cartItems, removeItemFromCart, addItemToCart, clearItemFromCart, cartTotal } = useContext(CartContext);
+  const {
+    cartCount,
+    cartItems,
+    removeItemFromCart,
+    addItemToCart,
+    clearItemFromCart,
+    cartTotal,
+  } = useContext(CartContext);
+  const { isSpinnerOpen, setIsSpinnerOpen } = useContext(SpinnerContext);
   if (cartCount === 0 || cartItems.length === 0) {
     return (
       <div className="checkout-container">
@@ -36,15 +45,33 @@ const CheckOut = () => {
               </td>
               <td>{item.name}</td>
               <td className="quantity-cell">
-                <span className="quantity-btn" onClick={() => removeItemFromCart(item)}>-</span>
+                <span
+                  className="quantity-btn"
+                  onClick={() => removeItemFromCart(item)}
+                >
+                  -
+                </span>
                 <span className="quantity-value">{item.quantity}</span>
-                <span className="quantity-btn" onClick={() => addItemToCart(item)}>+</span>
+                <span
+                  className="quantity-btn"
+                  onClick={() => addItemToCart(item)}
+                >
+                  +
+                </span>
               </td>{" "}
               <td>${item.price * item.quantity}</td>
               <td>
                 <button
                   className="remove-btn"
-                  onClick={() => clearItemFromCart(item)}
+                  onClick={() => {
+                    if (!isSpinnerOpen) {
+                      setIsSpinnerOpen(true);
+                    }
+                    setTimeout(() => {
+                      clearItemFromCart(item);
+                      setIsSpinnerOpen(false);
+                    }, 350);
+                  }}
                   aria-label={`Remove ${item.name}`}
                 >
                   X

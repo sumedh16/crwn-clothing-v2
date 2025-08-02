@@ -6,29 +6,33 @@ import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import "./navigation.styles.scss";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import CartMenu from "../../components/cart-wrapper/cart-menu.component";
-
+import { usePlatformNavigate } from "../../utils/platformNavigate";
+import { SpinnerContext } from "../../context/spinner.context";
 
 const Navigation = () => {
   const { currentUser } = useContext(userContext);
   const { setIsCartOpen } = useContext(CartContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const platformNavigate = usePlatformNavigate();
+  const { setIsSpinnerOpen } = useContext(SpinnerContext);
 
   useEffect(() => {
+    setIsSpinnerOpen(false);
     setIsCartOpen(false);
   }, [location, setIsCartOpen]);
 
   return (
     <>
       <div className="navigation">
-        <Link className="logo-container" to="/">
+        <span className="logo-container"onClick={() => platformNavigate('/')} >
           <CrwnLogo className="logo" />
-        </Link>
+        </span>
         <div className="nav-links-container">
           <span
             className="nav-link"
             onClick={() => {
-              navigate("/shop");
+              platformNavigate("/shop");
             }}
           >
             SHOP
@@ -44,9 +48,9 @@ const Navigation = () => {
               SIGN OUT
             </span>
           ) : (
-            <Link className="nav-link" to="/sign-in">
+            <span className="nav-link" onClick={() => platformNavigate("/sign-in")}>
               SIGN IN
-            </Link>
+            </span>
           )}
           <CartMenu />
         </div>

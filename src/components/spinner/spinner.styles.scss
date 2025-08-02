@@ -1,0 +1,31 @@
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ccc;
+  border-top: 6px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.spinner-inline {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
