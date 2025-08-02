@@ -1,19 +1,20 @@
-import { useContext, useEffect} from "react";
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { userContext } from "../../context/user.context";
 import { CartContext } from "../../context/cart.context";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import "./navigation.styles.scss";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
-import CartIcon from "../../components/cart-icon/cart-icon.component";
-import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
+import CartMenu from "../../components/cart-wrapper/cart-menu.component";
+
 
 const Navigation = () => {
   const { currentUser } = useContext(userContext);
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { setIsCartOpen } = useContext(CartContext);
   const location = useLocation();
+  const navigate = useNavigate();
 
-   useEffect(() => {
+  useEffect(() => {
     setIsCartOpen(false);
   }, [location, setIsCartOpen]);
 
@@ -24,9 +25,14 @@ const Navigation = () => {
           <CrwnLogo className="logo" />
         </Link>
         <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
+          <span
+            className="nav-link"
+            onClick={() => {
+              navigate("/shop");
+            }}
+          >
             SHOP
-          </Link>
+          </span>
           {currentUser ? (
             <span
               className="nav-link"
@@ -42,10 +48,9 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
-          <CartIcon />
+          <CartMenu />
         </div>
       </div>
-      {isCartOpen && <CartDropDown />}
       <Outlet />
     </>
   );

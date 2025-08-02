@@ -1,26 +1,13 @@
-import ProductCard from "../../components/product-card/product-card.component";
-import SHOP_DATA from "../../utils/shop-data.json";
-import { useEffect } from "react";
-import "./shop.styles.scss";
-const Shop = () => {
+import { Routes, Route } from "react-router-dom";
+import CategoriesPreview from "../../components/categories-preview/categories-preview.component";
+import Category from "../category/category.component";
 
-    useEffect(
-        () => {
-           SHOP_DATA.forEach((item) => {
-                console.log(item);
-            }); 
-        }, []
-    );
-    return (
-        <div>
-            <h1>Inside Shop Item</h1>
-            <div className="shop-grid">
-                {SHOP_DATA.map((item) => {
-                return <ProductCard key={item.id} product={item} />
-            })}
-            </div>
-            
-        </div>     
-    )
+const Shop = () => {
+  return (
+    <Routes>
+      <Route index element={<CategoriesPreview />}></Route>
+      <Route path=":category" element={<Category />}></Route>
+    </Routes>
+  );
 };
 export default Shop;

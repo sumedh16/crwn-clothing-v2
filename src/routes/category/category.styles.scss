@@ -1,0 +1,15 @@
+.container-category {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    h2{
+        text-align: center;
+    }
+
+    .container-products {
+        display: grid;
+        grid-template-columns: repeat(4, 2fr);
+        gap: 16px;
+    }
+}
