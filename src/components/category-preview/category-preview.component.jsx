@@ -9,7 +9,7 @@ const CategoryPreview = ({ title, products }) => {
     return (
         <div className='category-preview-container'>
             <h2>
-                <span className='title' onClick={() => navigate(`/shop/${title}`)} >{`Check more ${title} ----->`}</span>
+                <span className='title' onClick={() => navigate(`/shop/${title}`)} >{`Click for more ${title} ----->`}</span>
             </h2>
             <div className='preview'>
                 {products

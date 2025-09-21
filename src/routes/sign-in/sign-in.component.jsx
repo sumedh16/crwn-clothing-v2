@@ -2,7 +2,7 @@ import {
   signInWithGooglePopup,
   signInWithEmailAndPasswordHandler,
 } from "../../utils/firebase/firebase.utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import FormInput from "../../components/form-input/form-input.component";
 import { validateForm } from "../../utils/forms/form.utils";
@@ -44,6 +44,7 @@ const SignIn = () => {
           setFormFields(defaultFields);
           setErrors({});
           console.log("User signed in successfully");
+          navigate("/shop")
         }
       } catch (e) {
         console.error("Error signing in user", e);
@@ -73,6 +74,7 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFields);
   const [errors, setErrors] = useState({});
   const { email, password } = formFields;
+  const navigate = useNavigate();
   return (
     <div className="sign-up-container">
       <h1>Welcome !</h1>
