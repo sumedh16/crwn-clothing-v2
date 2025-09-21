@@ -20,7 +20,7 @@ const Navigation = () => {
   useEffect(() => {
     setIsSpinnerOpen(false);
     setIsCartOpen(false);
-  }, [location, setIsCartOpen]);
+  }, [location]);
 
   return (
     <>

@@ -53,7 +53,7 @@ const SignIn = () => {
             refs.email.current.focus();
             break;
           case "auth/wrong-password":
-            setErrors({ password: "Incorrect password" });
+            setErrors({ email: "Incorrect password or email", password: "Incorrect password or email" });
             refs.password.current.focus();
             break;
           default:
